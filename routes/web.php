@@ -20,3 +20,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::resource('/quantri/baiviet', ArticleController::class);
+
+
+// Route::get('/admin','AdminController@showImportantInfo')->middleware(['auth','role:admin']);
+
+Route::get('/quantri/trangchu', function () {
+    return view('admin.home');
+})->name('quantri/trangchu');
