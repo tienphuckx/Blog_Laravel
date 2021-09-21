@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -15,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(10);
+        $articles = Article::latest()->paginate(10);
         return view('admin.article.list',['articles' => $articles]);
     }
 
@@ -26,22 +27,21 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('article.create');
+        return view('admin.article.edit',['article'=>new Article]);
     }
 
-    /**
+    /** 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(ArticleRequest $request)
-    {
+    {   
         $article = new Article;
-        $article->title = $request->title;
-        $article->content = $request->content;
+        $article->fill($request->all());
         $article->save();
-        return redirect()->route('baiviet.create')->with('msg','Dang bai thanh cong');
+        return redirect()->route('baiviet.create')->with('msg','Đăng bài viết thành công');
     }
 
     /**
@@ -63,7 +63,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+        return view('admin.article.edit',['article'=>$article]);
     }
 
     /**
@@ -73,9 +74,12 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, $id)
     {
-        //
+        $article = Article::find($id);
+        $article->fill($request->all());
+        $article->save();
+        return redirect()->route('baiviet.edit',$id)->with('msg','Cập nhật thành công');
     }
 
     /**
@@ -86,6 +90,14 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+        return back()->with('msg','Xóa thành công');
+    }
+
+    public function deleteAll(Request $request){
+        $ids = $request->ids;
+        DB::delete('delete from articles where id in ('.implode(",",$ids).')');
+        return redirect('/quantri/baiviet')->with('msg','Xóa thành công');
     }
 }

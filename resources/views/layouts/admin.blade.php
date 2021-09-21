@@ -19,7 +19,11 @@
     <link rel="stylesheet" href="{{asset('admin')}}/plugins/animation/css/animate.min.css">
     <!-- vendor css -->
     <link rel="stylesheet" href="{{asset('admin')}}/css/style.css">
+    <script src="{{asset('admin')}}/js/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+    
 </head>
 
 <body>
@@ -74,10 +78,8 @@
                         </span></a>
 
                       <ul class="pcoded-submenu">
-                        <li class=""><a href="icon-feather.html" class="">Add new post<span class="pcoded-badge label label-danger">NEW</span></a></li>
-                        <li class=""><a href="bc_button.html" class="">Danh sách</a></li>
-                        <li class=""><a href="bc_badges.html" class="">Detail post</a></li>
-                        <li class=""><a href="bc_breadcrumb-pagination.html" class="">Update post</a></li>                         
+                        <li class=""><a href="{{route('baiviet.create')}}" class="">Thêm bài viết</a></li>
+                        <li class=""><a href="{{route('baiviet.index')}}" class="">Danh sách</a></li>                     
                       </ul>
                   </li>
 
@@ -86,9 +88,7 @@
                       <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Người dùng</span></a>
                       <ul class="pcoded-submenu">
                         <li class=""><a href="icon-feather.html" class="">Add new user<span class="pcoded-badge label label-danger">NEW</span></a></li>
-                        <li class=""><a href="bc_button.html" class="">List user</a></li>
-                        <li class=""><a href="bc_badges.html" class="">Detail user</a></li>
-                        <li class=""><a href="bc_breadcrumb-pagination.html" class="">Update user</a></li>                       
+                        <li class=""><a href="bc_button.html" class="">List user</a></li>                  
                       </ul>
                   </li>
 
@@ -116,6 +116,7 @@
     </nav>
 
     <header class="navbar pcoded-header navbar-expand-lg navbar-light">
+
         <div class="m-header">
             <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
             <a href="index.html" class="b-brand">
@@ -125,9 +126,11 @@
                    <span class="b-title">Datta Able</span>
                </a>
         </div>
+
         <a class="mobile-menu" id="mobile-header" href="javascript:">
             <i class="feather icon-more-horizontal"></i>
         </a>
+
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
@@ -220,16 +223,26 @@
                                 </a>
                             </div>
                             <ul class="pro-body">
-                                <li><a href="javascript:" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                                 {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                    
+                                </form>
+
+                                
                                 <li><a href="javascript:" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-                                <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-                                <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+                            
                             </ul>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
+
     </header>
   
 
@@ -245,9 +258,9 @@
                     <div class="main-body">
                         <div class="page-wrapper">
 
-                            <!-- [ Main Content ] start -->
+                           
                             @yield('content')
-                            <!-- [ Main Content ] end -->
+                            
                             
                         </div>
                     </div>
@@ -257,8 +270,8 @@
     </div>
    
 <script src="{{asset('admin')}}/js/vendor-all.min.js"></script>
-	<script src="{{asset('admin')}}/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="{{asset('admin')}}/js/pcoded.min.js"></script>
+<script src="{{asset('admin')}}/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{asset('admin')}}/js/pcoded.min.js"></script>
 
 </body>
 </html>

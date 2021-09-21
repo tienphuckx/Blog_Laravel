@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
@@ -16,7 +16,7 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next, $role)
     {
-        if(Auth::user()->role->name != $role){
+        if(Auth::user()->role->code != $role){
             return redirect()->route('login');
             abort('Khong duoc truy cap');
         }

@@ -10,6 +10,6 @@ class Article extends Model
         'title',
         'thumbnail',
         'shortDescription',
-        'content'
+        'content',
     ];
 }
