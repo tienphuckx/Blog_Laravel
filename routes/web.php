@@ -28,7 +28,10 @@ Route::get('/', function(){
 
 
 Route::get('home', function(){
-    return view('home');
+    if(Auth::user()->role->code == 'admin')
+        return redirect('/quantri/trangchu');
+    else
+        return redirect('/trangchu');
 })->name('home');
 
 
@@ -39,6 +42,11 @@ Route::get('/trangchu',function(){
 
 Auth::routes();
 Route::middleware(['auth','role:admin'])->group(function(){
+
+    Route::get('/quantri/trangchu',function(){
+        return view('admin.home');
+    });
+
     Route::resource('quantri/baiviet','ArticleController');
     Route::delete('/deleteAll','ArticleController@deleteAll');
 });
