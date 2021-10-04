@@ -1,0 +1,6 @@
+.pcard{
+    overflow: hidden;
+  }
+.pcard-text{
+    word-wrap: break-word;
+  }

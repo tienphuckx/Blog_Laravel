@@ -8,39 +8,55 @@
     {{Session::get('msg')}}
   </div>
 @endif
+
+
   
   <form action="{{$article->id == null ? route('baiviet.store') : route('baiviet.update',$article->id)}}" method="POST">
     @csrf
    
-    <input name="title" value="{{$article->title}}" />
-    @error('title')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+    <div class="form-group">
+      <label for=""><p>Tiêu đề</p></label>
+      <input class="form-control" name="title" value="{{$article->title}}" />
+      @error('title')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
 
-    <input name="thumbnail" value="{{$article->thumbnail}}" />
-    @error('thumbnail')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+    <div class="form-group">
+      <label for=""><p>Hình ảnh</p></label>
+      <input class="form-control" name="thumbnail" value="{{$article->thumbnail}}" />
+      @error('thumbnail')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
 
 
-    <input name="shortDescription" value="{{$article->shortDescription}}" />
+    <div class="form-group">
+      <label for="">Mô tả ngắn</label>
+      <input class="form-control" name="shortDescription" value="{{$article->shortDescription}}" />
     @error('shortDescription')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
+    </div>
 
-    <textarea name="content" cols="30" rows="10"  >{{$article->content}}</textarea>
+    <div class="form-group">
+      <label for="">Nội dung bài viết</label>
+      <textarea class="form-control" name="content" cols="30" rows="10"  >{{$article->content}}</textarea>
     @error('content')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
+    </div>
     
   
-    @if (empty($article->id))
+    <div>
+      @if (empty($article->id))
       @method('POST')
-      <input type="submit" value="Đăng Bài" />              
+      <input class="btn btn-primary" type="submit" value="Đăng Bài" />              
     @else
       @method('PUT')
-      <input type="submit" value="Cập Nhật" />    
+      <input class="btn btn-primary" type="submit" value="Cập Nhật" />    
     @endif
+    </div>
     
 
   </form>

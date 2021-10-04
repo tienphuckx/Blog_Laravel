@@ -38,7 +38,9 @@ Route::get('/trangchu',function(){
 });
 
 Auth::routes();
-Route::middleware(['auth','role:admin'])->group(function(){
+
+Route::middleware(['auth','role:admin'])->group(function()
+{
     Route::resource('quantri/baiviet','ArticleController');
     Route::delete('/deleteAll','ArticleController@deleteAll');
 });
