@@ -64,10 +64,9 @@
                     <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Thể loại</span></a>
                         <ul class="pcoded-submenu">                                                    
-                            <li class=""><a href="icon-feather.html" class="">Add new category<span class="pcoded-badge label label-danger">NEW</span></a></li>
-                            <li class=""><a href="bc_button.html" class="">List category</a></li>
-                            <li class=""><a href="bc_badges.html" class="">Detail category</a></li>
-                            <li class=""><a href="bc_breadcrumb-pagination.html" class="">Update category</a></li>
+                            <li class=""><a href="{{route('theloai.create')}}" class="">Thêm thể loại</a></li>
+                            <li class=""><a href="{{route('theloai.index')}}" class="">Danh sách</a></li>
+                            
                         </ul>
                     </li>
 
@@ -87,8 +86,8 @@
                     <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
                       <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Người dùng</span></a>
                       <ul class="pcoded-submenu">
-                        <li class=""><a href="icon-feather.html" class="">Add new user<span class="pcoded-badge label label-danger">NEW</span></a></li>
-                        <li class=""><a href="bc_button.html" class="">List user</a></li>                  
+                        <li class=""><a href="{{route('nguoidung.create')}}" class="">Thêm người dùng </a></li>    
+                        <li class=""><a href="{{route('nguoidung.index')}}" class="">Danh sách </a></li>    
                       </ul>
                   </li>
 
@@ -104,7 +103,10 @@
                    <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
                     <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Roles</span></a>
                     <ul class="pcoded-submenu">
-                        <li class=""><a href="bc_button.html" class="">List </a></li>                          
+
+                        <li class=""><a href="{{route('role.create')}}" class="">Thêm Role </a></li> 
+                        <li class=""><a href="{{route('role.index')}}" class="">Danh sách </a></li>    
+                                                
                     </ul>
                 </li>
                     

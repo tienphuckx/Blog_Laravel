@@ -1,13 +1,35 @@
-@extends('layouts.back-end')
+@extends('layouts.admin')
+
 @section('content')
 
 
 
+
+
+@if (Session::has('msg'))
+  <div class="alert alert-success" role="alert">
+    {{Session::get('msg')}}
+  </div>
+@endif
+
+
+  <div class="card-header">
+    <h5>Danh sách thể  loại</h5>
+  <div>
+  <div class="mr-auto">
+    <button onclick="warningBeforeDelete()" class="btn btn-dark" >Delete</button>
+  </div>
+
+    
 <div class="col-xl-12 col-md-12">
+
   <div class="card Recent-Users">
-      <div class="card-header">
-          <h5>All Category</h5>
-      </div>
+
+      <form method="POST" action="/deleteAllCategory" id="formDelete">
+        @method('DELETE')
+        @csrf
+
+
       <div class="card-block px-0 py-3">
           <div class="table-responsive">
               <table class="table table-hover table-bordered">
@@ -15,117 +37,87 @@
                 <thead>
                   <tr class="unread" >
                       <td>
-                        <h6 class="mb-1">No.</h6>
+                        <input type="checkbox" id="checkAll">
                       </td>
                       <td>
-                        {{-- <img class="rounded-circle" style="width:40px;" src="{{asset('back-end/admin')}}/images/user/avatar-1.jpg" alt="activity-user"> --}}
-                        <h6 class="mb-1">Image</h6>
+                        <h6 class="mb-1">Name</h6>
                       </td>
                       <td>
-                          <h6 class="mb-1">Name</h6>
-                          
+                        <h6 class="mb-1">Code</h6>
                       </td>
-                      <td>
-                          <h6 class="text-muted">
-                            <i class="fas fa-circle text-c-green f-10 m-r-15"></i>Description</h6>
-                      </td>
-                      <td  class="text-right">
-                        Options
+                      <td >
+                        <h6 class="mb-1">Options</h6>
                       </td>
                   </tr>                                                                    
-
               </thead>
 
-                  <tbody>
-                      <tr class="unread">
-                          <td></td>
-                          <td><img class="rounded-circle" style="width:40px;" src="{{asset('back-end/admin')}}/images/user/avatar-1.jpg" alt="activity-user"></td>
+                  <tbody >
+                      @foreach ($categories as $item)
+                        <tr class="unread">
                           <td>
-                              <h6 class="mb-1">Isabella Christensen</h6>
-                              <p class="m-0">Lorem Ipsum is simply…</p>
+                            <input type="checkbox" name="ids[]" id="checkbox_{{$item->id}}" value="{{$item->id}}">
                           </td>
                           <td>
-                              <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
-                          </td>
-                          <td class="text-right">
-                            <a href="#!" class="label theme-bg2 text-white f-12">Detail</a>
-                            <a href="#!" class="label theme-bg text-white f-12">Update</a>
-                            <a href="#!" class="label text-white f-12 btn-danger">Delete</a>
-                      </tr>
-
-                      <tr class="unread">
-                        <td></td>
-                          <td><img class="rounded-circle" style="width:40px;" src="{{asset('back-end/admin')}}/images/user/avatar-2.jpg" alt="activity-user"></td>
-                          <td>
-                              <h6 class="mb-1">Mathilde Andersen</h6>
-                              <p class="m-0">Lorem Ipsum is simply text of…</p>
+                            {{$item->name}}
                           </td>
                           <td>
-                              <h6 class="text-muted"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>11 MAY 10:35</h6>
+                            {{$item->code}}
                           </td>
-                          <td class="text-right">
-                            <a href="#!" class="label theme-bg2 text-white f-12">Detail</a>
-                            <a href="#!" class="label theme-bg text-white f-12">Update</a>
-                            <a href="#!" class="label btn-danger text-white f-12">Delete</a>
+                          <td >
+                          <a href="{{route('theloai.edit',$item->id)}}" class="btn btn-outline-danger">Edit</a>
                           </td>
-                      </tr>
-
-                      <tr class="unread">
-                        <td></td>
-                          <td><img class="rounded-circle" style="width:40px;" src="{{asset('back-end/admin')}}/images/user/avatar-3.jpg" alt="activity-user"></td>
-                          <td>
-                              <h6 class="mb-1">Karla Sorensen</h6>
-                              <p class="m-0">Lorem Ipsum is simply…</p>
-                          </td>
-                          <td>
-                              <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>9 MAY 17:38</h6>
-                          </td>
-
-                          <td  class="text-right">
-                            <a href="#!" class="label theme-bg2 text-white f-12">Detail</a>
-                            <a href="#!" class="label theme-bg text-white f-12">Update</a>
-                            <a href="#!" class="label btn-danger text-white f-12">Delete</a>
-                          </td>
-                      </tr>
-
-                      <tr class="unread">
-                        <td></td>
-                          <td><img class="rounded-circle" style="width:40px;" src="{{asset('back-end/admin')}}/images/user/avatar-1.jpg" alt="activity-user"></td>
-                          <td>
-                              <h6 class="mb-1">Ida Jorgensen</h6>
-                              <p class="m-0">Lorem Ipsum is simply text of…</p>
-                          </td>
-                          <td>
-                              <h6 class="text-muted f-w-300"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>19 MAY 12:56</h6>
-                          </td>
-                          <td  class="text-right">
-                            <a href="#!" class="label theme-bg2 text-white f-12">Detail</a>
-                            <a href="#!" class="label theme-bg text-white f-12">Update</a>
-                            <a href="#!" class="label btn-danger text-white f-12">Delete</a>
-                      </tr>
-
-                      <tr class="unread">
-                        <td></td>
-                          <td><img class="rounded-circle" style="width:40px;" src="{{asset('back-end/admin')}}/images/user/avatar-2.jpg" alt="activity-user"></td>
-                          <td>
-                              <h6 class="mb-1">Albert Andersen</h6>
-                              <p class="m-0">Lorem Ipsum is simply dummy…</p>
-                          </td>
-                          <td>
-                              <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>21 July 12:56</h6>
-                          </td>
-                          <td class="text-right">
-                            <a href="#!" class="label theme-bg2 text-white f-12">Detail</a>
-                            <a href="#!" class="label theme-bg text-white f-12">Update</a>
-                            <a href="#!" class="label btn-danger text-white f-12">Delete</a>
-                      </tr>
-
+                      @endforeach  
+                    </tr>
                   </tbody>
               </table>
+              
           </div>
       </div>
+      
+      </form>
+      {{$categories->links()}}
+
   </div>
 </div>
 
+<script>
+
+  $("#checkAll").click(function(){
+      $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+
+
+  function warningBeforeDelete(){
+    const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+
+  swalWithBootstrapButtons.fire({
+    title: 'Bạn có muốn xóa',
+    text: "Bạn sẽ không thể phục hồi lại",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Vâng, Xóa hết',
+    cancelButtonText: 'Rời khỏi',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $( "#formDelete" ).submit();
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelled',
+      )
+    }
+  })
+  }
+
+  
+  </script>
 
 @endsection

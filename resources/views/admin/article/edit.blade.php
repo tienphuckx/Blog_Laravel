@@ -8,40 +8,65 @@
     {{Session::get('msg')}}
   </div>
 @endif
+
+
   
   <form action="{{$article->id == null ? route('baiviet.store') : route('baiviet.update',$article->id)}}" method="POST">
     @csrf
    
-    <input name="title" value="{{$article->title}}" />
-    @error('title')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+    <div class="form-group">
+      <input name="title" class="form-control" placeholder="Tiêu đề" value="{{$article->title}}" />
+      @error('title')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
 
-    <input name="thumbnail" value="{{$article->thumbnail}}" />
-    @error('thumbnail')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+    <div class="form-group">
+      <select class="form-select" name="category_id">
+        <option selected value="">Chọn thể loại</option>
 
+        @foreach ($categories as $category)
+          <option value="{{$category->id}}" @if ($article->category_id == $category->id) selected @endif>
+            {{$category->name}}
+          </option>
+        @endforeach
 
-    <input name="shortDescription" value="{{$article->shortDescription}}" />
-    @error('shortDescription')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+      </select>
+      @error('category_id')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
 
-    <textarea name="content" cols="30" rows="10"  >{{$article->content}}</textarea>
-    @error('content')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    
+    <div class="form-group">
+      <input name="thumbnail" class="form-control" placeholder="Thumbnail" value="{{$article->thumbnail}}" />
+      @error('thumbnail')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
+
+    <div class="form-group">
+      <input name="shortDescription" class="form-control" placeholder="Mô tả ngắn" value="{{$article->shortDescription}}" />
+      @error('shortDescription')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
+
+    <div class="form-group">
+      <textarea name="content" class="form-control" cols="30" rows="10"  placeholder="Nội dung" >{{$article->content}}</textarea>
+      @error('content')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
   
+    <div class="form-group">
     @if (empty($article->id))
       @method('POST')
-      <input type="submit" value="Đăng Bài" />              
+      <button type="submit" class="btn btn-primary">Đăng Bài </button>              
     @else
       @method('PUT')
-      <input type="submit" value="Cập Nhật" />    
+      <button type="submit" class="btn btn-primary">Cập Nhật </button> 
     @endif
-    
+    </div>
 
   </form>
 

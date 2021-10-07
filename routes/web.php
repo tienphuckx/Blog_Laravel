@@ -48,7 +48,17 @@ Route::middleware(['auth','role:admin'])->group(function(){
     });
 
     Route::resource('quantri/baiviet','ArticleController');
-    Route::delete('/deleteAll','ArticleController@deleteAll');
+    Route::delete('/deleteAllArticle','ArticleController@deleteAll');
+
+    Route::resource('quantri/theloai','CategoryController');
+    Route::delete('/deleteAllCategory','CategoryController@deleteAll');
+
+    Route::resource('quantri/role','RoleController');
+    Route::delete('/deleteAllRole','RoleController@deleteAll');
+
+    Route::resource('quantri/nguoidung','UserController');
+    Route::delete('/deleteAllUser','UserController@deleteAll');
+
 });
 
 

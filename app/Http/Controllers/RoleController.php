@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use Illuminate\Http\Request;
-use App\Http\Requests\ArticleRequest;
-use App\Models\Article;
+use App\Models\Role;
 use Illuminate\Support\Facades\DB;
-use App\Models\Category;
 
-class ArticleController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->paginate(10);
-        return view('admin.article.list',['articles' => $articles]);
+        return view('admin.role.list',
+        [
+            'roles' => Role::latest()->paginate(10)
+        ]);
     }
 
     /**
@@ -28,25 +29,24 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.article.edit',
+        return view('admin.role.edit',
         [
-            'article'=>new Article,
-            'categories'=>Category::all()
+            'role' => new Role
         ]);
     }
 
-    /** 
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArticleRequest $request)
-    {   
-        $article = new Article;
-        $article->fill($request->all());
-        $article->save();
-        return redirect()->route('baiviet.create')->with('msg','Đăng thành công');
+    public function store(RoleRequest $request)
+    {
+        $role = new Role;
+        $role->fill($request->all());
+        $role->save();
+        return redirect()->route('role.create')->with('msg','Đăng thành công');
     }
 
     /**
@@ -68,8 +68,10 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $article = Article::find($id);
-        return view('admin.article.edit',['article'=>$article,'categories'=>Category::all()]);
+        return view('admin.role.edit',
+        [
+            'role' => Role::find($id)
+        ]);
     }
 
     /**
@@ -79,12 +81,12 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticleRequest $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-        $article = Article::find($id);
-        $article->fill($request->all());
-        $article->save();
-        return redirect()->route('baiviet.edit',$id)->with('msg','Cập nhật thành công');
+        $role = Role::find($id);
+        $role->fill($request->all());
+        $role->save();
+        return redirect()->route('role.edit',$id)->with('msg','Cập nhật thành công');
     }
 
     /**
@@ -95,14 +97,12 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $article = Article::find($id);
-        $article->delete();
-        return back()->with('msg','Xóa thành công');
+        //
     }
 
     public function deleteAll(Request $request){
         $ids = $request->ids;
-        DB::delete('delete from articles where id in ('.implode(",",$ids).')');
-        return redirect()->route('baiviet.index')->with('msg','Xóa thành công');
+        DB::delete('delete from roles where id in ('.implode(",",$ids).')');
+        return redirect()->route('role.index')->with('msg','Xóa thành công');
     }
 }
