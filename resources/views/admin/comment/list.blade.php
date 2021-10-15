@@ -14,7 +14,7 @@
 
 
   <div class="card-header">
-    <h5>Danh sách bài viết</h5>
+    <h5>Danh sách bình luận</h5>
   <div>
   <div class="mr-auto">
     <button onclick="warningBeforeDelete()" class="btn btn-dark" >Delete</button>
@@ -25,7 +25,7 @@
 
   <div class="card Recent-Users">
 
-      <form method="POST" action="/deleteAllArticle" id="formDelete">
+      <form method="POST" action="/deleteAllComment" id="formDelete">
         @method('DELETE')
         @csrf
 
@@ -40,7 +40,10 @@
                         <input type="checkbox" id="checkAll">
                       </td>
                       <td>
-                        <h6 class="mb-1">Tiêu đề</h6>
+                        <h6 class="mb-1">Article Title</h6>
+                      </td>
+                      <td>
+                        <h6 class="mb-1">UserName</h6>
                       </td>
                       <td >
                         <h6 class="mb-1">Options</h6>
@@ -49,16 +52,19 @@
               </thead>
 
                   <tbody >
-                      @foreach ($articles as $item)
+                      @foreach ($comments as $item)
                         <tr class="unread">
                           <td>
                             <input type="checkbox" name="ids[]" id="checkbox_{{$item->id}}" value="{{$item->id}}">
                           </td>
                           <td>
-                            {{$item->title}}
+                            {{$item->article->title}}
+                          </td>
+                          <td>
+                            {{$item->user->userName}}
                           </td>
                           <td >
-                          <a href="{{route('baiviet.edit',$item->id)}}" class="btn btn-outline-danger">Edit</a>
+                          <a href="{{route('binhluan.edit',$item->id)}}" class="btn btn-outline-danger">Edit</a>
                           </td>
                       @endforeach  
                     </tr>
@@ -69,7 +75,7 @@
       </div>
       
       </form>
-      {{$articles->links()}}
+      {{$comments->links()}}
 
   </div>
 </div>
@@ -91,12 +97,12 @@
   })
 
   swalWithBootstrapButtons.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
+    title: 'Bạn có muốn xóa',
+    text: "Bạn sẽ không thể phục hồi lại",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonText: 'Yes, delete it!',
-    cancelButtonText: 'No, cancel!',
+    confirmButtonText: 'Vâng, Xóa hết',
+    cancelButtonText: 'Rời khỏi',
     reverseButtons: true
   }).then((result) => {
     if (result.isConfirmed) {
@@ -112,6 +118,6 @@
   }
 
   
-</script>
+  </script>
 
 @endsection

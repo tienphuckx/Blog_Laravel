@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -41,7 +42,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->fill($request->all());
         $category->save();
-        return redirect()->route('theloai.create')->with('msg','Đăng thành công');
+        return redirect()->route('theloai.create')->with('msg','Thêm thành công');
     }
 
     /**

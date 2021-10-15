@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
@@ -43,10 +45,13 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {   
+        
         $article = new Article;
         $article->fill($request->all());
+        $article->user_id = Auth::user()->id;
+        $article->thumbnail = $request->thumbnail->store('uploads','public');
         $article->save();
-        return redirect()->route('baiviet.create')->with('msg','Đăng thành công');
+        return redirect()->route('baiviet.create')->with('msg','Thêm thành công');
     }
 
     /**
@@ -83,6 +88,7 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         $article->fill($request->all());
+        $article->user_id = Auth::user()->id;
         $article->save();
         return redirect()->route('baiviet.edit',$id)->with('msg','Cập nhật thành công');
     }

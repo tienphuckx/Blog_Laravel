@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Http\Requests\RoleRequest;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use App\User;
 use Illuminate\Support\Facades\DB;
+use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 
-class RoleController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +19,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('admin.role.list',
+        return view('admin.user.list',
         [
-            'roles' => Role::latest()->paginate(10)
+            'users' => User::latest()->paginate(10)
         ]);
     }
 
@@ -29,9 +32,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.role.edit',
+        return view('admin.user.edit',
         [
-            'role' => new Role
+            'user' => new User,
+            'roles' => Role::all()
         ]);
     }
 
@@ -41,12 +45,14 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequest $request)
+    public function store(UserRequest $request)
     {
-        $role = new Role;
-        $role->fill($request->all());
-        $role->save();
-        return redirect()->route('role.create')->with('msg','Đăng thành công');
+        $user = new User;
+        $user->fill($request->all());
+        $user->password = Hash::make($request->password);
+        dd($user->password);
+        $user->save();
+        return redirect()->route('nguoidung.create')->with('msg','Thêm thành công');
     }
 
     /**
@@ -68,9 +74,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.role.edit',
+        return view('admin.user.edit',
         [
-            'role' => Role::find($id)
+            'user' => User::find($id),
+            'roles' => Role::all()
         ]);
     }
 
@@ -81,12 +88,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $role = Role::find($id);
-        $role->fill($request->all());
-        $role->save();
-        return redirect()->route('role.edit',$id)->with('msg','Cập nhật thành công');
+        $user = User::find($id);
+        $user->fill($request->all());
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()->route('nguoidung.edit',$id)->with('msg','Cập nhật thành công');
     }
 
     /**
@@ -102,7 +110,7 @@ class RoleController extends Controller
 
     public function deleteAll(Request $request){
         $ids = $request->ids;
-        DB::delete('delete from roles where id in ('.implode(",",$ids).')');
-        return redirect()->route('role.index')->with('msg','Xóa thành công');
+        DB::delete('delete from articles where id in ('.implode(",",$ids).')');
+        return redirect()->route('nguoidung.index')->with('msg','Xóa thành công');
     }
 }

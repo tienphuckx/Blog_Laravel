@@ -12,6 +12,9 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/css/libs/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/css/libs/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/css/styles.css">
+	<script src="{{asset('admin')}}/js/jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="home">
@@ -72,16 +75,27 @@
                                 <div class="main-menu">
                                     <nav>
                                         <ul class="menu-list">
+
                                             <li class="menu-item-has-children">
-                                                <a href="index-2.html">Home</a>
+                                                <a href="{{route('trangchu')}}">Home</a>
                                             </li>
 
                                             <li>
-                                                <a href="about.html">Category</a>
+                                                <a href="{{route('category.index')}}">Category</a>
                                             </li>
-                                            <li>
-                                                <a href="#">Profile</a>
-                                            </li>
+											@if (Auth::check())
+												<li>
+													<a href="{{route('profile.show',Auth::user()->id)}}">Profile</a>
+												</li>
+												<li>
+													<a href="{{route('post.create')}}">Create Post</a>
+												</li>
+												<li>
+													<a href="{{route('post.index')}}">List Article</a>
+												</li>
+											@endif
+											
+
                                             
                                         </ul>
                                     </nav>
@@ -95,13 +109,15 @@
                                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                         </li>
                                     @else
-                                        <li class="nav-item dropdown">
-                                            
-                                                {{ Auth::user()->name }}
+                                        
+												<a href="{{route('profile.show',Auth::user()->id)}}">
+													Xin chào {{ Auth::user()->fullName }}
+												</a>
+                                                
                                            
-            
+												<br>
                                             
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                <a href="{{ route('logout') }}"
                                                    onclick="event.preventDefault();
                                                                  document.getElementById('logout-form').submit();">
                                                     {{ __('Logout') }}
@@ -111,7 +127,7 @@
                                                     @csrf
                                                 </form>
                                             
-                                        </li>
+                                       
                                     @endguest
                                     
                                 </div>

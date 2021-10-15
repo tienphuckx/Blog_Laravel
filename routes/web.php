@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\AdminController;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Article;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +33,8 @@ Route::get('home', function(){
 
 
 
-Route::get('/trangchu',function(){
-    return view('web.home',['articles'=> Article::paginate(10)]);
-});
+
+
 
 Auth::routes();
 Route::middleware(['auth','role:admin'])->group(function(){
@@ -47,18 +43,29 @@ Route::middleware(['auth','role:admin'])->group(function(){
         return view('admin.home');
     });
 
-    Route::resource('quantri/baiviet','ArticleController');
-    Route::delete('/deleteAllArticle','ArticleController@deleteAll');
+    Route::resource('quantri/baiviet','admin\ArticleController');
+    Route::delete('/deleteAllArticle','admin\ArticleController@deleteAll');
 
-    Route::resource('quantri/theloai','CategoryController');
-    Route::delete('/deleteAllCategory','CategoryController@deleteAll');
+    Route::resource('quantri/theloai','admin\CategoryController');
+    Route::delete('/deleteAllCategory','admin\CategoryController@deleteAll');
 
-    Route::resource('quantri/role','RoleController');
-    Route::delete('/deleteAllRole','RoleController@deleteAll');
+    Route::resource('quantri/role','admin\RoleController');
+    Route::delete('/deleteAllRole','admin\RoleController@deleteAll');
 
-    Route::resource('quantri/nguoidung','UserController');
-    Route::delete('/deleteAllUser','UserController@deleteAll');
+    Route::resource('quantri/nguoidung','admin\UserController');
+    Route::delete('/deleteAllUser','admin\UserController@deleteAll');
 
+    Route::resource('quantri/binhluan','admin\CommentController');
+    Route::delete('/deleteAllComment','admin\CommentController@deleteAll');
 });
 
+Route::middleware(['auth','role:user'])->group(function(){
+    Route::resource('post','web\ArticleController');
+    Route::delete('deleteAllPost','web\ArticleController@deleteAll');
+    Route::resource('profile','web\ProfileController');
+    Route::resource('comment','web\CommentController');
+});
+
+Route::resource('category','web\CategoryController');
+Route::get('trangchu','web\HomeController@home')->name('trangchu');
 

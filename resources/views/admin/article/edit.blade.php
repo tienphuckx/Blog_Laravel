@@ -11,7 +11,7 @@
 
 
   
-  <form action="{{$article->id == null ? route('baiviet.store') : route('baiviet.update',$article->id)}}" method="POST">
+  <form action="{{$article->id == null ? route('baiviet.store') : route('baiviet.update',$article->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
    
     <div class="form-group">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="form-group">
-      <select class="form-select" name="category_id">
+      <select class="form-control" name="category_id">
         <option selected value="">Chọn thể loại</option>
 
         @foreach ($categories as $category)
@@ -37,12 +37,7 @@
       @enderror
     </div>
 
-    <div class="form-group">
-      <input name="thumbnail" class="form-control" placeholder="Thumbnail" value="{{$article->thumbnail}}" />
-      @error('thumbnail')
-      <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
+    <input type="hidden" name="thumbnail" id="thumbnail" value="{{$article->thumbnail}}" />
 
     <div class="form-group">
       <input name="shortDescription" class="form-control" placeholder="Mô tả ngắn" value="{{$article->shortDescription}}" />

@@ -19,7 +19,8 @@ class CreateArticlesTable extends Migration
             $table->string('thumbnail')->default('');
             $table->text('shortDescription');
             $table->text('content');
-            $table->integer('category_id')->default(1);
+            $table->bigInteger('category_id')->default(1);
+            $table->bigInteger('user_id')->default(1);
             $table->timestamps();
         });
     }
