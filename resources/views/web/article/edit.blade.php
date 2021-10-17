@@ -9,8 +9,18 @@
   </div>
 @endif
 
-<form action="{{$article->id == null ? route('post.store') : route('post.update',$article->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{$article->id == null ? route('post.store') : route('post.update',$article->id) }}" method="POST"  enctype="multipart/form-data">
     @csrf
+
+    <img src="{{url('storage/'.$article->thumbnail)}}" alt="">
+    <div class="form-group">
+      <label >Thumbnail</label>
+      <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" />
+      @error('thumbnail')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
+    <input type="hidden" name="thumbnail" value="{{$article->thumbnail}}">
 
     <div class="form-group">
         <input name="title" class="form-control" placeholder="Tiêu đề" value="{{$article->title}}" />
@@ -18,24 +28,7 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
       </div>
-
-    
-    @if (empty($article->id))
-    <div class="form-group">
-      <label >Thumbnail</label>
-      <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
-      @error('thumbnail')
-      <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
-    @else
-        <input type="hidden" name="thumbnail" value="{{$article->thumbnail}}">
-    @endif
-    
-  
      
-
-
     <div class="form-group">
       <label >Category</label>
       <select class="form-control" id="category_id" name="category_id">
@@ -52,19 +45,21 @@
     </div>
 
     <div class="form-group">
-        <input name="shortDescription" class="form-control" placeholder="Mô tả ngắn" value="{{$article->shortDescription}}" />
+        <textarea name="shortDescription" class="form-control" rows="5" placeholder="Mô tả ngắn">{{$article->shortDescription}}</textarea>
         @error('shortDescription')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-      </div>
+    </div>
+
+   
 
     <div class="form-group">
-      <textarea name="content" class="form-control" cols="30" rows="10"  placeholder="Nội dung" >{{$article->content}}</textarea>
+      <textarea name="content" id="editor" class="form-control"  placeholder="Nội dung">{{$article->content}}</textarea>
       @error('content')
       <div class="alert alert-danger">{{ $message }}</div>
       @enderror
     </div>
-  
+
     <div class="form-group">
     @if (empty($article->id))
       @method('POST')
@@ -76,4 +71,12 @@
     </div>
   </form>
 
+
+<script>
+  ClassicEditor
+      .create( document.querySelector( '#editor' ) )
+      .catch( error => {
+          console.error( error );
+      } );
+</script>
 @endsection

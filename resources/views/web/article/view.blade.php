@@ -37,9 +37,8 @@
           <blockquote>
             <p> {{$article->shortDescription}}</p>
           </blockquote>
-          <p>{{$article->shortDescription}}</p>
           <h3>This is content</h3>
-          {{$article->content}}
+          {!! $article->content !!}
         </div>
         <!-- End The Content -->
 
@@ -68,7 +67,7 @@
               <div class="comment-body">
                 <div class="comment-head">
                   <div class="comment-avatar">
-                    <img alt="avatar" src="images/avatar-150px.jpg">
+                    <img alt="avatar" src="{{url('storage/'.$comment->user->avatar)}}">
                   </div>
                   <div class="comment-info">
                     <h5 class="title">{{$comment->user->userName}}</h5>
@@ -112,6 +111,9 @@
           <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
           <input type="hidden" name="article_id" value="{{$article->id}}">
         </div>
+        @error('content')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="contact-item form-submit">
           <input name="submit" type="submit" id="submit" class="submit" value="Submit">
         </div>

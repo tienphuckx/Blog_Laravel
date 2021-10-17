@@ -25,7 +25,7 @@
 
   <div class="card Recent-Users">
 
-      <form method="POST" action="/deleteAllArticle" id="formDelete">
+      <form method="POST" action="{{route('baiviet.destroy',5)}}" id="formDelete">
         @method('DELETE')
         @csrf
 

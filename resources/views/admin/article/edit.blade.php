@@ -13,45 +13,58 @@
   
   <form action="{{$article->id == null ? route('baiviet.store') : route('baiviet.update',$article->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
-   
+
+    <img src="{{url('storage/'.$article->thumbnail)}}" alt="">
     <div class="form-group">
-      <input name="title" class="form-control" placeholder="Tiêu đề" value="{{$article->title}}" />
-      @error('title')
+      <label >Thumbnail</label>
+      <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" />
+      @error('thumbnail')
       <div class="alert alert-danger">{{ $message }}</div>
       @enderror
     </div>
+    <input type="hidden" name="thumbnail" value="{{$article->thumbnail}}">
 
-    <div class="form-group">
-      <select class="form-control" name="category_id">
-        <option selected value="">Chọn thể loại</option>
+  <div class="form-group">
+    <input name="title" class="form-control" placeholder="Tiêu đề" value="{{$article->title}}" />
+    @error('title')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+  </div>
 
-        @foreach ($categories as $category)
-          <option value="{{$category->id}}" @if ($article->category_id == $category->id) selected @endif>
-            {{$category->name}}
-          </option>
-        @endforeach
+  <div class="form-group">
+    <select class="form-control" name="category_id">
+      <option selected value="">Chọn thể loại</option>
 
-      </select>
-      @error('category_id')
-      <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
+      @foreach ($categories as $category)
+        <option value="{{$category->id}}" @if ($article->category_id == $category->id) selected @endif>
+          {{$category->name}}
+        </option>
+      @endforeach
 
-    <input type="hidden" name="thumbnail" id="thumbnail" value="{{$article->thumbnail}}" />
+    </select>
+    @error('category_id')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+  </div>
 
-    <div class="form-group">
-      <input name="shortDescription" class="form-control" placeholder="Mô tả ngắn" value="{{$article->shortDescription}}" />
+ 
+  
+
+  <div class="form-group">
+      <textarea name="shortDescription" class="form-control" rows="5" placeholder="Mô tả ngắn">{{$article->shortDescription}}</textarea>
       @error('shortDescription')
       <div class="alert alert-danger">{{ $message }}</div>
       @enderror
-    </div>
+  </div>
 
-    <div class="form-group">
-      <textarea name="content" class="form-control" cols="30" rows="10"  placeholder="Nội dung" >{{$article->content}}</textarea>
-      @error('content')
-      <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
+ 
+
+  <div class="form-group">
+    <textarea name="content" id="editor" class="form-control"  placeholder="Nội dung">{{$article->content}}</textarea>
+    @error('content')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+  </div>
   
     <div class="form-group">
     @if (empty($article->id))
@@ -67,5 +80,11 @@
 
 
 
-
+<script>
+  ClassicEditor
+      .create( document.querySelector( '#editor' ) )
+      .catch( error => {
+          console.error( error );
+      } );
+</script>
 @endsection

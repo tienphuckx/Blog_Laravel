@@ -49,8 +49,8 @@ class UserController extends Controller
     {
         $user = new User;
         $user->fill($request->all());
+        $user->avatar = $request->file('avatar')->store('uploads','public');
         $user->password = Hash::make($request->password);
-        dd($user->password);
         $user->save();
         return redirect()->route('nguoidung.create')->with('msg','Thêm thành công');
     }
@@ -88,10 +88,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $user = User::find($id);
         $user->fill($request->all());
+        if($request->file('avatar') != null){
+            $user->avatar = $request->file('avatar')->store('uploads','public');
+        }
         $user->password = Hash::make($request->password);
         $user->save();
         return redirect()->route('nguoidung.edit',$id)->with('msg','Cập nhật thành công');
@@ -110,7 +113,7 @@ class UserController extends Controller
 
     public function deleteAll(Request $request){
         $ids = $request->ids;
-        DB::delete('delete from articles where id in ('.implode(",",$ids).')');
+        DB::delete('delete from users where id in ('.implode(",",$ids).')');
         return redirect()->route('nguoidung.index')->with('msg','Xóa thành công');
     }
 }
