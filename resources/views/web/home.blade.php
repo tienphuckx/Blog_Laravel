@@ -2,54 +2,54 @@
 
 @section('content')
 
-        <div class="posts">
-            <div class="posts-inner">
-
-                @foreach ($articles as $item)
-                    <article class="post">
-                        <div class="post-header">
-                            <h2 class="title">
-                                <a href="single.html">{{$item->title}}</a>
-                            </h2>
-
-                            <!-- Post Details -->
-                            <div class="post-details">
-                                <div class="post-cat">
-                                    <a href="#">{{$item->category->name}}</a>
-                                </div>
-                                <a href="#" class="post-date"><span>{{$item->created_at}}</span></a>
-                                
-                            </div>
-                            <!-- End Post Details -->
+        <div class="mb-5">
+            @foreach ($articles as $item)
+            <div class="baiviet bv_block">                                 
+                <div class="baiviet__main">
+                    <div class="row p-0 m-0">
+                        <div class="thum_hinhanh col-md-4 p-0 m-0">
+                            <img src="{{asset('web/images/posts/1.jpg')}}" alt="">
                         </div>
-                        <div class="post-media">
-                            <a href="single.html">
-                                <img src="storage/{{$item->thumbnail}}" alt="Post">
-                            </a>
-                        </div>
-                        <div class="post-content">
-
-                            <!-- The Content -->
-                            <div class="the-excerpt">
+                        <div class="col-md-8 bg-success p-0 m-0">
+                            {{-- TITLE  --}}
+                            <p class="baiviet__header-title">{{$item->title}}</p>  
+                            <!-- MOTA -->
+                            <div class="baiviet__mota">
                                 <p>{{$item->shortDescription}}</p>
                             </div>
-                            <!-- End The Content -->
+                            
                         </div>
+                    </div>
+                </div>
 
-                        <div class="read-more">
-                            <a href="{{route('post.show',$item->id)}}">Continue Reading ...</a>
+                <div class="baiviet__header">                  
+                                        
+                    <!-- Post Details -->
+                    <div class="baiviet__header-chitiet mt-1">
+                        <div class="chitiet-category">
+                            <a href="#">{{$item->category->name}}</a>
                         </div>
-
-
-                    </article>
-                @endforeach
-
+                        <a href="#" class="chitiet-date"><span>{{$item->created_at}}</span></a>
+                       
+                    </div>
+                    
+                    <!-- End Post Details -->
+                </div>  
+                <div>
+                    <div class="baiviet_read">
+                        <a href="{{route('post.show',$item->id)}}">Xem chi tiết</a>
+                    </div>
+                </div>
+           
             </div>
+        @endforeach
 
-            <!-- Pagination -->
-            <div class="pagination-wrap">
-                {{$articles->links()}}
-            </div>
-            <!-- End Pagination -->
+    
+        <!-- Pagination -->
+        <div class="pagination-wrap">
+            {{$articles->links()}}
         </div>
+        <!-- End Pagination -->
+        </div>
+   
 @endsection

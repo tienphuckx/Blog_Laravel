@@ -17,12 +17,11 @@ use Illuminate\Http\Request;
 
 
 
-
+/**DEFAULT */
 
 Route::get('/', function(){
     return redirect()->route('login');
 });
-
 
 Route::get('home', function(){
     if(Auth::user()->role->code == 'admin')
@@ -32,12 +31,10 @@ Route::get('home', function(){
 })->name('home');
 
 
-
-
-
-
+/** ADMIN MANAGER */
 Auth::routes();
-Route::middleware(['auth','role:admin'])->group(function(){
+Route::middleware(['auth','role:admin'])->group(function()
+{
 
     Route::get('/quantri/trangchu',function(){
         return view('admin.home');
@@ -59,9 +56,13 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::delete('/deleteAllComment','admin\CommentController@deleteAll');
 });
 
-Route::middleware(['auth','role:user'])->group(function(){
+/** USER MANAGER */
+
+Route::middleware(['auth','role:user'])->group(function()
+{
     Route::resource('post','web\ArticleController');
     Route::delete('deleteAllPost','web\ArticleController@deleteAll');
+
     Route::resource('profile','web\ProfileController');
     Route::resource('comment','web\CommentController');
 });

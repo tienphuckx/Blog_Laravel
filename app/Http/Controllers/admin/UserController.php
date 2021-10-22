@@ -47,11 +47,12 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        dd(123);
         $user = new User;
         $user->fill($request->all());
         $user->password = Hash::make($request->password);
-        dd($user->password);
         $user->save();
+        dd($user);
         return redirect()->route('nguoidung.create')->with('msg','Thêm thành công');
     }
 

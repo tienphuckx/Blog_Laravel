@@ -2,14 +2,11 @@
 
 @section('content')
 
-
 @if (Session::has('msg'))
   <div class="alert alert-success" role="alert">
     {{Session::get('msg')}}
   </div>
 @endif
-
-
 
   <button onclick="warningBeforeDelete()" class="btn btn-dark" >Delete</button>
 

@@ -12,6 +12,16 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/css/libs/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/css/libs/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/css/phuc_custom.css">
+
+	{{-- <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">  --}}
+
+	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/owl/owl-carousel/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/owl/owl-carousel/owl.theme.css"> 
+
+
+
 	<script src="{{asset('admin')}}/js/jquery-3.6.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -22,14 +32,7 @@
 	<!-- Wrapper Site -->
 	<div id="main-content">
 
-		<!-- Preload -->
-		<div id="preload">
-			<div class="kd-bounce">
-				<div></div>
-				<div></div>
-			</div>
-		</div>
-		<!-- Preload -->
+	
 
 		<!-- Mobile Menu -->
 		<div class="mobile">
@@ -64,39 +67,36 @@
                             <div class="table-cell">
                                 <!-- Logo -->
                                 <div class="logo">
-                                    <a href="index-2.html">
-                                        <img src="{{asset('web')}}/images/logo-light.png" alt="Logo" class="logo-light">
-                                        <img src="{{asset('web')}}/images/logo.png" alt="Logo">
+                                    <a href="{{route('trangchu')}}"">
+										PV Blog
                                     </a>
                                 </div>
                                 <!-- End Logo -->
             
                                 <!-- Navigation -->
-                                <div class="main-menu">
+                                <div class="main-menu bg-dark">
                                     <nav>
                                         <ul class="menu-list">
-
-                                            <li class="menu-item-has-children">
-                                                <a href="{{route('trangchu')}}">Home</a>
+                                            <li class="">
+                                                <a href="{{route('trangchu')}}">Trang chủ</a>
                                             </li>
 
                                             <li>
-                                                <a href="{{route('category.index')}}">Category</a>
+                                                <a href="{{route('category.index')}}">Danh mục</a>
                                             </li>
+
 											@if (Auth::check())
 												<li>
-													<a href="{{route('profile.show',Auth::user()->id)}}">Profile</a>
+													<a href="{{route('profile.show',Auth::user()->id)}}">Thông tin tài khoản</a>
 												</li>
 												<li>
-													<a href="{{route('post.create')}}">Create Post</a>
+													<a href="{{route('post.create')}}">Tạo bài viết mới nào</a>
 												</li>
 												<li>
-													<a href="{{route('post.index')}}">List Article</a>
+													<a href="{{route('post.index')}}">Bài viết của bạn</a>
 												</li>
 											@endif
-											
-
-                                            
+											                                       
                                         </ul>
                                     </nav>
                                 </div>
@@ -109,18 +109,18 @@
                                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                         </li>
                                     @else
-                                        
+												<span>---</span>
 												<a href="{{route('profile.show',Auth::user()->id)}}">
-													Xin chào {{ Auth::user()->fullName }}
+													{{ Auth::user()->fullName }}
 												</a>
-                                                
+                                                <span>---</span>
                                            
 												<br>
                                             
                                                 <a href="{{ route('logout') }}"
                                                    onclick="event.preventDefault();
                                                                  document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
+                                                    {{ __('Đăng xuất') }}
                                                 </a>
             
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -131,18 +131,13 @@
                                     @endguest
                                     
                                 </div>
-                                <!-- End Socials -->
+                                <!-- End Socials -->                       
             
-                                <div class="box-search">
-                                    <form role="search" method="get" action="#">
-                                        <input type="text" placeholder="Search ..." name="s" />
-                                    </form>
-                                </div>
-            
-                                <div class="copyright">
+                                <div class="bg-success copyright text-center d-flex align-items-end flex-column">
                                     <p>
-                                        Tancho @ 2018. Design by <a href="#">Kendy</a>
+                                    	Code Blog @ 2021. Design by
                                     </p>
+									<p> -- P & V --</p>
                                 </div>
             
                             </div>
@@ -151,9 +146,19 @@
                 </div>
 
                 
-                <div class="col-md-9 col-md-offset-3">
+				{{-- MAIN  --}}
+                <div class="bg_none col-md-9 content_custom m-0 p-0 ">
+
+					{{-- INCLUDE HEAD  --}}
+					@include('layouts.blocks.head')
+				
                     @yield('content')
                 </div>
+
+				<div>
+					{{-- @include('layouts.blocks.foot') --}}
+				</div>
+
             </div>
 			
 		</div>
@@ -161,81 +166,6 @@
 	
 
 
-	{{-- <footer id="footer" class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-9 col-md-offset-3">
-					<div class="footer-inner">
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="instagram">
-									<h2 class="title"><a href="#">Follow Me @ Instagram</a></h2>
-									<ul>
-										<li><a href="#"><img src="images/instagram/1.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/2.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/3.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/4.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/5.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/6.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/7.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/8.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/9.jpg" alt="Image"></a></li>
-										<li><a href="#"><img src="images/instagram/10.jpg" alt="Image"></a></li>
-									</ul>
-								</div>
-							</div>
-
-						</div>
-						<div class="footer-widgets">
-							<div class="row">
-								<div class="col-sm-4">
-									<div class="widget">
-										<h2 class="title"><span>About Me</span></h2>
-										<p>
-											I am tancho a Graphic Designer based in New York, specializing in User Interface Design and Development.
-										</p>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="widget">
-										<h2 class="title"><span>Contact Me</span></h2>
-										<ul>
-											<li>
-												Tel: +123 456 789
-											</li>
-											<li>
-												Email: name@domain.com
-											</li>
-											<li>
-												Address: 820 Utica Ave, Brooklyn, NY
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="widget">
-										<h2 class="title"><span>Web Links</span></h2>
-										<ul>
-
-											<li><a href="#">Tips & tricks</a></li>
-											<li><a href="#">Examples</a></li>
-											<li><a href="#">Documentation</a></li>
-											<li><a href="#">Support</a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<div class="copyright">
-										<p>Tancho @ 2018. Design by <a href="#">Kendy</a></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer> --}}
 
 
 	<!-- Scripts -->
@@ -243,6 +173,10 @@
 	<script src="{{asset('web')}}/js/libs/masonry.pkgd.min.js"></script>
 	<script src="{{asset('web')}}/js/libs/imagesloaded.pkgd.min.js"></script>
 	<script src="{{asset('web')}}/js/scripts.js"></script>
+
+	<script src="assets/owl-carousel/owl.carousel.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{asset('web')}}/owl/owl-carousel/owl.carousel.js"> 
+
 	<!-- End Scripts -->
 
 </body>

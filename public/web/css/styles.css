@@ -427,10 +427,8 @@ iframe {
   border: 0;
   max-width: 100%;
 }
-/* ===========  3. General  =========== */
 body {
   margin: 0;
-  padding: 60px 0 0;
   font-family: 'Lato', serif;
   font-size: 13px;
   background: #f9f9f9;
@@ -439,8 +437,23 @@ body {
   line-height: 24px;
   word-spacing: 1px;
 }
+/* =============================================  3. General  =========== */
+/* =============================================  3. General  =========== */
+/* =============================================  3. General  =========== */
+/* =============================================  3. General  =========== */
+/* =============================================  3. General  =========== */
+/* =============================================  3. General  =========== */
+
+.home{
+  background: linear-gradient(90deg, #C6FFDD,#FBD786,#f7797d 100%);
+}
+.content_custom{
+  top: 50px;
+  background: #fff;
+  padding: 0;
+}
 .container {
-  max-width: 1000px;
+ 
 }
 .mobile {
   display: none;
@@ -490,17 +503,42 @@ body {
   -o-transition: visibility 0.3s ease, opacity 0.3s ease;
   transition: visibility 0.3s ease, opacity 0.3s ease;
 }
-/* ===========  4. Header  =========== */
+
+
+
+
+/* ==============================================  TOP Header  =========== */
+/* ==============================================  TOP Header  =========== */
+/* ==============================================  TOP Header  =========== */
+/* ==============================================  TOP Header  =========== */
+/* ==============================================  TOP Header  =========== */
+/* ==============================================  TOP Header  =========== */
+.top__head{
+  background-color: #000000;
+  padding: 7px;
+}
+.top__head-slogan {
+  color: #00b9eb;
+  text-align: center;
+  margin: 0;
+}
+.top__head-slogan span{
+  font-style: italic;
+}
+/* ==============================================  4. Header  =========== */
+/* ==============================================  4. Header  =========== */
+/* ==============================================  4. Header  =========== */
+/* ==============================================  4. Header  =========== */
+/* ==============================================  4. Header  =========== */
+/* ==============================================  4. Header  =========== */
 .header {
-  width: 220px;
-  bottom: 0;
-  top: 0;
-  text-align: right;
+  width: 210px;
+  top: 50px;
+  padding: 0 7px;
   z-index: 9;
+  background-color: #111;
 }
-.header-text {
-  margin-bottom: 50px;
-}
+
 .header-text blockquote {
   font-size: 16px;
   padding-left: 50px;
@@ -508,9 +546,7 @@ body {
 .header-text blockquote:before {
   font-size: 30px;
 }
-.menu-left .header {
-  text-align: left;
-}
+
 .menu-left .main-menu .sub-menu {
   padding-left: 0;
   padding-right: 20px;
@@ -534,6 +570,7 @@ body {
   font-size: 12px;
   line-height: 28px;
   text-transform: uppercase;
+  text-align: center;
 }
 .main-menu ul,
 .main-menu li {
@@ -587,13 +624,13 @@ body {
 }
 .logo {
   font-size: 40px;
-  color: #000000;
+  color: #fff;
   text-transform: uppercase;
-  padding-bottom: 50px;
-  letter-spacing: 2px;
+  padding-bottom: 40px;
+  padding-top: 10px;
+  letter-spacing: 1px;
   line-height: 40px;
-  max-width: 75%;
-  margin-left: auto;
+  text-align: center;
 }
 .logo a {
   color: inherit;
@@ -603,10 +640,11 @@ body {
 }
 .socials {
   padding-top: 40px;
+  text-align: center;
 }
 .socials a {
   margin-right: 8px;
-  color: #242424;
+  color: #4b4b4b;
   font-size: 13px;
 }
 .socials .fa-search {
@@ -621,10 +659,16 @@ body {
   border-radius: 2px;
 }
 .copyright {
+  margin-top: 50px;
   font-size: 12px;
-  color: #ababab;
+  color: #000000;
 }
-/* ===========  5. featured Slider  =========== */
+
+/* ================================  5. featured Slider  =========== */
+/* ================================  5. featured Slider  =========== */
+/* ================================  5. featured Slider  =========== */
+/* ================================  5. featured Slider  =========== */
+/* ================================  5. featured Slider  =========== */
 .image {
   background-color: #ababab;
   background-repeat: no-repeat;
@@ -643,7 +687,14 @@ body {
   background-color: #ffffff;
   margin-bottom: 40px;
 }
-/* ===========  6. Posts  =========== */
+/* ==========================================  6. Posts  =========== */
+/* ==========================================  6. Posts  =========== */
+/* ==========================================  6. Posts  =========== */
+/* ==========================================  6. Posts  =========== */
+/* ==========================================  6. Posts  =========== */
+.bg_none{
+  background-color: transparent;
+}
 .posts {
   padding-left: 80px;
   padding-right: 50px;
@@ -708,7 +759,7 @@ body {
   z-index: 9;
 }
 .posts .list-layout .post-media img {
-  display: none;
+  display: block;
 }
 .posts .list-layout .post-content {
   margin-left: 240px;
@@ -716,9 +767,9 @@ body {
   min-height: 240px;
 }
 .posts .list-layout .title {
-  font-size: 18px;
-  text-align: left;
+  font-size: 14px;
   padding-top: 5px;
+  color: #00b9eb;
 }
 .posts .list-layout .post-details {
   text-align: left;
@@ -1086,10 +1137,10 @@ body {
   list-style: none;
 }
 #comments .comments-inner {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 #comments .comments-inner + #respond {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 #comments .comment-list {
   padding-left: 0;
@@ -1266,10 +1317,6 @@ body {
 }
 /* ===========  7. Footer  =========== */
 .footer-inner {
-  margin-top: 60px;
-  margin-bottom: 50px;
-  margin-left: 80px;
-  margin-right: 50px;
   font-size: 11px;
 }
 .footer-inner .title {
@@ -1358,7 +1405,13 @@ body {
   text-align: center;
   color: #000000;
 }
-/* ===========  8. Preload  =========== */
+/* ========================================  8. Preload  =========== */
+/* ========================================  8. Preload  =========== */
+/* ========================================  8. Preload  =========== */
+/* ========================================  8. Preload  =========== */
+/* ========================================  8. Preload  =========== */
+/* ========================================  8. Preload  =========== */
+/* ========================================  8. Preload  =========== */
 #preload {
   top: 0;
   left: 0;
@@ -1407,7 +1460,12 @@ body {
     transform: scale(1);
   }
 }
-/* ===========  9. Responsive  =========== */
+/* =============================================  9. Responsive  =========== */
+/* =============================================  9. Responsive  =========== */
+/* =============================================  9. Responsive  =========== */
+/* =============================================  9. Responsive  =========== */
+/* =============================================  9. Responsive  =========== */
+/* =============================================  9. Responsive  =========== */
 @media screen and (max-width: 991px) {
   .posts {
     padding-left: 50px;
@@ -1572,3 +1630,119 @@ body {
   }
 }
 /*# sourceMappingURL=styles.css.map */
+
+
+/* ====================================== POST CUSTOM ============== */
+/* ====================================== POST CUSTOM ============== */
+/* ====================================== POST CUSTOM ============== */
+/* ====================================== POST CUSTOM ============== */
+/* ====================================== POST CUSTOM ============== */
+/* ====================================== POST CUSTOM ============== */
+.baiviet_read{
+  align-items: center;
+  font-display: inline-block;
+}
+.baiviet_read a{
+  color: white;
+  padding: 5px;
+  background-color: red;
+  align-items: center;
+
+  text-transform: uppercase;
+}
+.thum_hinhanh{
+  /* height: 150px; */
+}
+.thum_hinhanh img{
+  width: 100%;
+}
+.bv_block{
+  margin-bottom: 15px;
+}
+.baiviet{
+  padding: 10px 10px;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+.baiviet__header-title{
+  color: #030303;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.baiviet__header-chitiet {
+  display: flex;
+  justify-content: end;
+  
+}
+.chitiet-category {
+  padding: 7px;
+  background-color: rgb(54, 53, 53);
+}
+.chitiet-category a{
+  color: rgb(199, 192, 192);
+} 
+.chitiet-date {
+  margin-left: 10px;
+  color: rgb(199, 192, 192);
+  padding: 7px;
+  background-color: rgb(54, 53, 53);
+}
+.baiviet__hinhanh{
+  background: #000;
+}
+.baiviet__hinhanh img{
+  width: 100%;
+}
+
+.baiviet__main{
+
+}
+.baiviet__mota{
+  font-style: italic;
+  padding: 7px;
+  margin-top: 7px;
+  font-size: 16px;
+  color: black;
+ 
+}
+.baiviet__noidung{
+  border: 1px solid white;
+  padding: 7px;
+  color: black;
+}
+.baiviet__tacgia{
+  display: flex;
+  font-style: italic;
+  flex-direction: row;
+  justify-content: end;
+  color: rgb(7, 7, 7);
+  padding: 7px;
+  
+}
+.tentacgia{
+  color: rgb(0, 0, 0);
+  margin-left: 10px;
+}
+
+/* ===================== CATE PAGE ======= */
+/* ===================== CATE PAGE ======= */
+/* ===================== CATE PAGE ======= */
+/* ===================== CATE PAGE ======= */
+/* ===================== CATE PAGE ======= */
+.cate{
+
+}
+
+.cate__item{
+  background-color: honeydew;
+  margin-bottom: 10px;
+}
+
+.cate__item a{
+  margin: 0;
+  display: inline-block;
+  /* background-color: red; */
+  color: #6b6868;
+}
