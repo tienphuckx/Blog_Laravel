@@ -24,6 +24,7 @@
 
 	<script src="{{asset('admin')}}/js/jquery-3.6.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="{{asset('skeditor')}}/ckeditor.js"></script>
 
 </head>
 

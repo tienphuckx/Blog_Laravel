@@ -62,9 +62,11 @@ class CommentController extends Controller
 
     public function deleteAll(Request $request)
     {
+        
         $ids = $request->ids;
         foreach ($ids as $id) {
             Comment::find($id)->delete();
         }
+        return back()->with('msg','Xóa thành công');
     }
 }

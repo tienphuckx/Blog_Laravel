@@ -35,9 +35,10 @@ class ArticleController extends Controller
    
     public function store(ArticleRequest $request)
     {
+        
         $article = new Article();
         $article->fill($request->all());
-        $article->thumbnail = $request->thumbnail->store('uploads','public');
+        $article->thumbnail = $request->file('thumbnail')->store('uploads','public');
         $article->user_id = Auth::user()->id;
         $article->save();
         return redirect()->route('post.create')->with('msg','Thêm thành công');
@@ -67,9 +68,13 @@ class ArticleController extends Controller
    
     public function update(ArticleRequest $request, $id)
     {
+        
         $article = Article::find($id);
         $article->fill($request->all());
         $article->user_id = Auth::user()->id;
+        if($request->file('thumbnail') != null){
+            $article->thumbnail = $request->file('thumbnail')->store('uploads','public');
+        }
         $article->save();
         return redirect()->route('post.edit',$id)->with('msg','Cập nhật thành công');
     }

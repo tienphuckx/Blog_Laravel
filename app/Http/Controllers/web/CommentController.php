@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -20,7 +21,7 @@ class CommentController extends Controller
     }
 
     
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
         Comment::create($request->all());
         return redirect()->route('post.show',$request->article_id);

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +24,9 @@ Route::get('/', function(){
 
 Route::get('home', function(){
     if(Auth::user()->role->code == 'admin')
-        return redirect('/quantri/trangchu');
+        return redirect('quantri/trangchu');
     else
-        return redirect('/trangchu');
+        return redirect('trangchu');
 })->name('home');
 
 
@@ -36,24 +35,24 @@ Auth::routes();
 Route::middleware(['auth','role:admin'])->group(function()
 {
 
-    Route::get('/quantri/trangchu',function(){
+    Route::get('quantri/trangchu',function(){
         return view('admin.home');
     });
 
     Route::resource('quantri/baiviet','admin\ArticleController');
-    Route::delete('/deleteAllArticle','admin\ArticleController@deleteAll');
+    Route::delete('deleteAllArticle','admin\ArticleController@deleteAll');
 
     Route::resource('quantri/theloai','admin\CategoryController');
-    Route::delete('/deleteAllCategory','admin\CategoryController@deleteAll');
+    Route::delete('deleteAllCategory','admin\CategoryController@deleteAll');
 
     Route::resource('quantri/role','admin\RoleController');
-    Route::delete('/deleteAllRole','admin\RoleController@deleteAll');
+    Route::delete('deleteAllRole','admin\RoleController@deleteAll');
 
     Route::resource('quantri/nguoidung','admin\UserController');
-    Route::delete('/deleteAllUser','admin\UserController@deleteAll');
+    Route::delete('deleteAllUser','admin\UserController@deleteAll');
 
     Route::resource('quantri/binhluan','admin\CommentController');
-    Route::delete('/deleteAllComment','admin\CommentController@deleteAll');
+    Route::delete('deleteAllComment','admin\CommentController@deleteAll');
 });
 
 /** USER MANAGER */

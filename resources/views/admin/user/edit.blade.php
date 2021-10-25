@@ -11,11 +11,21 @@
 
 
   
-  <form action="{{$user->id == null ? route('nguoidung.store') : route('nguoidung.update',$user->id)}}" method="POST">
+  <form id="formSubmit" action="{{$user->id == null ? route('nguoidung.store') : route('nguoidung.update',$user->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
    
 
     
+    <img src="{{url('storage/'.$user->avatar)}}" alt="">
+      <div class="form-group">
+        <label >Avatar</label>
+        <input type="file" class="form-control-file" id="avatar" name="avatar" />
+        @error('avatar')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+      </div>
+      <input type="hidden" name="avatar" value="{{$user->avatar}}">
+   
 
     <div class="form-group">
       <input name="userName" class="form-control" placeholder="Username" value="{{$user->userName}}" />
@@ -50,7 +60,7 @@
     <div class="form-group">
       <select class="form-select" name="status">
         <option selected value="">Chọn Status</option>
-        <option value="1" @if ($user->status == 1) selected @endif> >Hoạt động</option>
+        <option value="1" @if ($user->status == 1) selected @endif>Hoạt động</option>
         <option value="0" @if ($user->status == 0) selected @endif>Vô hiệu</option>
     </div>
 

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{asset('admin')}}/css/style.css">
     <script src="{{asset('admin')}}/js/jquery-3.6.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="{{asset('skeditor')}}/ckeditor.js"></script>
 
     
 </head>
@@ -60,6 +60,18 @@
                         <label>Danh mục</label>
                     </li>
 
+                      {{-- POSTS  --}}
+                      <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">
+                            Bài viết
+                          </span></a>
+  
+                        <ul class="pcoded-submenu">
+                          <li class=""><a href="{{route('baiviet.create')}}" class="">Thêm bài viết</a></li>
+                          <li class=""><a href="{{route('baiviet.index')}}" class="">Danh sách</a></li>                     
+                        </ul>
+                    </li>
+
                     {{-- CATEGORY  --}}
                     <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Thể loại</span></a>
@@ -70,17 +82,7 @@
                         </ul>
                     </li>
 
-                    {{-- POSTS  --}}
-                    <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
-                      <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">
-                          Bài viết
-                        </span></a>
-
-                      <ul class="pcoded-submenu">
-                        <li class=""><a href="{{route('baiviet.create')}}" class="">Thêm bài viết</a></li>
-                        <li class=""><a href="{{route('baiviet.index')}}" class="">Danh sách</a></li>                     
-                      </ul>
-                  </li>
+                  
 
                     {{-- USER  --}}
                     <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
@@ -178,7 +180,7 @@
                                     <div class="media">
                                         <img class="img-radius" src="assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
                                         <div class="media-body">
-                                            <p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
+                                            <p><strong>{{Auth::user()->fullName}}</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
                                             <p>New ticket Added</p>
                                         </div>
                                     </div>
@@ -218,11 +220,10 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-notification">
                             <div class="pro-head">
-                                <img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-                                <span>John Doe</span>
-                                <a href="auth-signin.html" class="dud-logout" title="Logout">
-                                    <i class="feather icon-log-out"></i>
-                                </a>
+                                <img src="{{url('storage/'.Auth::user()->avatar)}}" class="img-radius" >
+                                <br>
+                                Xin chào : <span>{{Auth::user()->fullName}}</span>
+                                
                             </div>
                             <ul class="pro-body">
                                 <a class="dropdown-item" href="{{ route('logout') }}"

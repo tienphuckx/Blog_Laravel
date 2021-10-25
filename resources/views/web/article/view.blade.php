@@ -35,6 +35,7 @@
         <img src="{{asset('web/images/posts/1.jpg')}}" alt="Post">
       </div>
 
+<<<<<<< HEAD
       {{-- NOI DUNG  --}}
       <div class="baiviet__main">  
         {{-- DESC  --}}
@@ -44,10 +45,20 @@
          {{-- TAC GIA       --}}
         <div class="baiviet__tacgia">
           Tác giả:  <span class="tentacgia">{{$article->user->fullName}}</span>
+=======
+        <!-- The Content -->
+        <div class="the-excerpt">
+          <blockquote>
+            <p> {{$article->shortDescription}}</p>
+          </blockquote>
+          <h3>This is content</h3>
+          {!! $article->content !!}
+>>>>>>> 4783897a507bb24d96789c149046c20fe39a40b1
         </div>
 
       </div>
 
+<<<<<<< HEAD
       <!-- Comments -->
       <div id="comments">
         <h2 class="title"><span>{{$comments->count()}} Comment</span></h2>
@@ -64,6 +75,49 @@
                         <h5 class="title">{{$comment->user->userName}}</h5>
                         <span class="comment-date">{{$comment->created_at}}</span>
                       </div>
+=======
+    </article>
+  </div>
+
+
+
+  
+
+
+
+  <!-- Comments -->
+  <div id="comments">
+    <h2 class="title"><span>{{$comments->count()}} Comment</span></h2>
+    <div class="comments-inner">
+      <ul class="comment-list">
+       @foreach ($comments as $comment)
+            <li class="comment">
+              <div class="comment-body">
+                <div class="comment-head">
+                  <div class="comment-avatar">
+                    <img alt="avatar" src="{{url('storage/'.$comment->user->avatar)}}">
+                  </div>
+                  <div class="comment-info">
+                    <h5 class="title">{{$comment->user->userName}}</h5>
+                    <span class="comment-date">{{$comment->created_at}}</span>
+                  </div>
+                </div>
+                @if ($comment->user_id == Auth::user()->id)
+                  <div class="comment-context">
+                    <p>{{$comment->content}}</p>
+                    <div class="reply">
+                      <span class="comment-reply">
+                          <a class="comment-reply-link" href="{{route('comment.destroy',$comment->id)}}" 
+                            onclick="event.preventDefault();
+                            document.getElementById('delete-comment-form').submit();">
+                              Delete
+                          </a>
+                          <form action="{{route('comment.destroy',$comment->id)}}" method="POST" id="delete-comment-form" class="d-none">
+                            @method('DELETE')
+                            @csrf
+                        </form>
+                      </span>
+>>>>>>> 4783897a507bb24d96789c149046c20fe39a40b1
                     </div>
                     @if ($comment->user_id == Auth::user()->id)
                       <div class="comment-context">
@@ -89,6 +143,7 @@
           @endforeach
           </ul>
         </div>
+<<<<<<< HEAD
 
         <!-- Respond -->
         <div id="respond" class="comment-respond">
@@ -110,6 +165,19 @@
         <!-- End Respond -->
       </div>
       <!-- End Comments -->
+=======
+        @error('content')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <div class="contact-item form-submit">
+          <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+        </div>
+      </form>
+    </div><!-- #respond -->
+    <!-- End Respond -->
+  </div>
+  <!-- End Comments -->
+>>>>>>> 4783897a507bb24d96789c149046c20fe39a40b1
 </div>
 
 @endsection

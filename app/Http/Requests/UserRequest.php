@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Facades\Auth;
 class UserRequest extends FormRequest
 {
     /**
@@ -13,7 +13,10 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if(Auth::check()){
+            return true;
+        }
+        return false;
     }
 
     /**
